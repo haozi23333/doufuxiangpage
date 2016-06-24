@@ -20,6 +20,13 @@ export const upload = async function (ctx,next) {
     function ff() {
         return new Promise(function (s, e) {
             var form = new multiparty.Form();
+            try {
+                var f = fs.statSync("/var/haozi/mc/" + url.slice(2).join("/"));
+            }catch (e)
+            {
+                fs.mkdirSync("/var/haozi/mc/" + url.slice(2).join("/"));
+            }
+            console.log(f);
             form.uploadDir = "/var/haozi/mc/" + url.slice(2).join("/");
             form.onPart = function (part) {
                 console.log(part)
