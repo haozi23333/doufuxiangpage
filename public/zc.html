@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>东方豆腐郷</title>
+    <script type="text/javascript" src="vue.js"></script>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .zhongchou{
+
+            margin-top: 20px;
+
+        }
+        .zhongchou div{
+            width: 130px;
+            /*40%*/
+            height: 200px;
+            /*60%*/
+            float: left;
+            transition: all 1s;
+        }
+        .zhongchou div img{
+            margin: 0px auto;
+            display: block;
+            width: 80%;
+            height: 52%;
+        }
+        .zhongchou div a{
+            display: block;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .title{
+            width: 100%;
+            font-size: 25px;
+            text-align: center;
+            display: block;
+        }
+        .zc{
+            width: 50%;
+            margin: 0px auto;
+        }
+        @media screen and (max-width:250px){
+
+        }
+        .logo{
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<nav></nav>
+<div class="logo">
+    <img src="img/touxiang/logo.png" alt="logo" width="150" height="150">
+</div>
+<span class="title">东方豆腐乡  六周目   服务器众筹情况</span>
+<div class="zc">
+
+<div id="zhongcou" class="zhongchou">
+    <div v-for="user in users">
+        <img src="./img/{{user.name}}.png">
+        <a>{{user.name}}</a>
+        <a>{{user.money}}￥</a>
+    </div>
+</div>
+</div>
+
+
+</body>
+</html>
+
+<script type="text/javascript">
+    var zhongchou = [
+        {
+            name:"大表哥",
+            money:50
+        },
+        {
+            name:"牛肉",
+            money:50
+        },
+        {
+            name:"haozi",
+            money:20
+        },
+        {
+            name:"tz_yoo",
+            money:15
+        },
+        {
+            name:"haimianbaobao",
+            money:5.4
+        },
+        {
+            name:"matilda",
+            money:5
+        },
+        {
+            name:"古代的苹果",
+            money:5
+        },
+        {
+            name:"幼儿园园长",
+            money:5
+        },
+        {
+            name:"小离",
+            money:1.44
+        }
+    ];
+
+    var zc = new Vue({
+        el:'#zhongcou',
+        data:{
+            users:zhongchou
+        }
+    });
+
+
+
+
+</script>

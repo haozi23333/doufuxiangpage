@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://xjx.sb/vue.js" ></script>
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #dropbox{
+            min-width: 100px;min-height: 150px;border: 3px dashed silver;margin: 10px;
+        }
+        .jdt {
+            width: 200px;background: rgba(91, 149, 51, 0.35);height: 30px
+        }
+        .jdt div{
+            width:0px;background-color: #333333;height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mods">
+        <div id="dropbox"></div>
+        <div v-for="mod in mods">
+            <a>mod 名称 ：{{mod.name}}</a>
+            <a>mod 大小 ：{{mod.length}}</a>
+            <button v-on:click="upload" >上传</button>
+            <div class='jdt'><div v-bind:style="{width:now/total*100+'%' }"></div></div>
+        </div>
+    </div>
+
+<div>
+    <div>
+        <a> modid ： </a><input id="modid" type="text">
+    </div>
+    <div>
+        <a> display ： </a><input  id="display" type="text">
+    </div>
+    <div>
+        <a> filename ： </a><input id="filename" type="text">
+    </div>
+    <div>
+        <a> note ： </a><input id="note" type="text">
+    </div>
+    <div>
+        <a> type ： </a><select id="type">
+        <option value="Core">Core</option>
+        <option value="Optional">Optional</option>
+        <option value="Optimization">Optimization</option>
+    </select>
+    </div>
+    <div>
+        <a> version ： </a><input id="version" type="text">
+    </div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    document.addEventListener("dragenter", function(e){
+        dropbox.style.borderColor = 'gray';
+    }, false);
+    document.addEventListener("dragleave", function(e){
+        dropbox.style.borderColor = 'silver';
+    }, false);
+    dropbox.addEventListener("dragenter", function(e){
+        dropbox.style.borderColor = 'gray';
+        dropbox.style.backgroundColor = 'white';
+    }, false);
+    dropbox.addEventListener("dragleave", function(e){
+        dropbox.style.backgroundColor = 'transparent';
+    }, false);
+    dropbox.addEventListener("dragenter", function(e){
+        e.stopPropagation();
+        e.preventDefault();
+    }, false);
+    dropbox.addEventListener("dragover", function(e){
+        e.stopPropagation();
+        e.preventDefault();
+    }, false);
+    dropbox.addEventListener("drop", function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        handleFiles(e.dataTransfer.files);
+    }, false);
+    handleFiles=function(files){
+        for(var i =0 ;i <files.length ;i++)
+            addFile(files[i]);
+    }
+    function addFile(file) {
+        sj.pop();
+        sj.push({
+            name:file.name,
+            length:file.size,
+            file:file
+        });
+    }
+    var sj =[];
+
+    var zc = new Vue({
+        el:'#mods',
+        data:{
+            mods:sj,
+            total:1,
+            now:0
+        },
+        methods:{
+            upload:function(evevnt) {
+                var bd = new FormData();
+                bd.append("file",sj[0].file);
+                bd.append("type",$("#select").val());
+                $.ajax({
+                        url: '/api/upload/mods',
+                        type:"POST",
+                        cache:false,
+                        data:bd,
+                        processData: false,
+                        contentType: false,
+                        xhr:function () {
+                            var xhr = jQuery.ajaxSettings.xhr();
+                            xhr.upload.addEventListener("progress",function (event) {
+                                zc.$data.now = event.loaded;
+                                zc.$data.total = event.total;
+                            },false);
+                            return xhr;
+                        },
+                        success:function (data) {
+                            var data = JSON.parse(data).data;
+                            $.post("/api/mc/upMod",{
+                                modid :         $("#modid").val(),
+                                display:        $("#display").val(),
+                                filename:       data.filename,
+                                md5:            data.md5,
+                                type:           $("#type").val(),
+                                version:        $("#version").val(),
+                                filePath:       data.path,
+                                note:           $("#note").val()
+                            },(data)=>console.log(data));
+                        }
+                    });
+            }
+        }
+    });
+</script>
