@@ -21,13 +21,13 @@ export const upload = async function (ctx,next) {
         return new Promise(function (s, e) {
             var form = new multiparty.Form();
             try {
-                var f = fs.statSync("/var/haozi/mc/" + url.slice(2).join("/"));
+                var f = fs.statSync("./uploads/mods/" + url.slice(2).join("/"));
             }catch (e)
             {
-                fs.mkdirSync("/var/haozi/mc/" + url.slice(2).join("/"));
+                fs.mkdirSync("./uploads/mods/" + url.slice(2).join("/"));
             }
             console.log(f);
-            form.uploadDir = "/var/haozi/mc/" + url.slice(2).join("/");
+            form.uploadDir = "./uploads/mods/" + url.slice(2).join("/");
             form.onPart = function (part) {
                 console.log(part)
                 part.addListener('data', function (a) {
@@ -39,13 +39,16 @@ export const upload = async function (ctx,next) {
                     res.end(msg("error", 200, err));
                     return;
                 }
+                console.log("" +
+                    "filename"+JSON.stringify());
+                console.log(files);
                 res.writeHead(200, {'content-type': 'text/plain;charset=UTF-8'});
-                var newpath = "/var/haozi/mc/" + url.slice(2).join("/") + files.file[0].originalFilename;
+                var newpath = "./uploads/mods/" + url.slice(2).join("/") +"/"+ fields.filename[0];
                 fs.renameSync(files.file[0].path, newpath);
                 var _file = fs.readFileSync(newpath);
                 s(msg("success", 200, {
                     folder: url.slice(2).join("/"),
-                    filename: files.file[0].originalFilename,
+                    filename: fields.filename[0],
                     md5: md5(_file),
                     path: newpath
                 }));

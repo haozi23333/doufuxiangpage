@@ -113,7 +113,7 @@
             upload:function(evevnt) {
                 var bd = new FormData();
                 bd.append("file",sj[0].file);
-                bd.append("type",$("#select").val());
+                bd.append("filename",$("#filename").val());
                 $.ajax({
                         url: '/api/upload/mods',
                         type:"POST",
