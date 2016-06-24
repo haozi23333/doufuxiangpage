@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel -d lib/ src/ && babel _app.js --out-file app.js",
-    "mdzz": "npm run compile && node --harmony index.js"
+    "mdzz": "npm run compile && node --harmony index.js",
+    "OK":"git pull && npm run mdzz"
   },
   "repository": {
     "type": "git",

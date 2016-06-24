@@ -89,8 +89,9 @@ class MC{
     async delectMod(body){
         console.log(body);
         body.uuid.map(async (j)=>{
+            console.log("删除的ID"+j);
             var i = await schemas.mod.findOne({uuid:j}).exec();
-            console.log(i);
+            console.log("删除的wenjian "+i);
             fs.unlinkSync(i.filePath);
             var m = await schemas.mod.remove({uuid:j}).exec();
             console.log(m);
