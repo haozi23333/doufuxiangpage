@@ -30,7 +30,7 @@ apiroute.post("/mc/:id",async function (ctx) {
             break;
         case "upMod":
             ctx.body = await mc.upMod(_body);
-            break
+            break;
         case "getModsList":
             ctx.body = await mc.getModsList();
             break;

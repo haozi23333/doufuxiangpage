@@ -10,7 +10,7 @@ export const mc =function (apiName) {
 };
 console.log(msg);
 
-export const VERSION  = "0.0.1";
+export const VERSION  = "7.0.0";
 export const FORGEVERSION = "1497";
 export const MCVERSION ="1.7.10";
 export const bb = {
@@ -39,7 +39,8 @@ class MC{
         return msg("success",200,{
             "version":  VERSION,
             "mc":       MCVERSION,
-            "forge":    FORGEVERSION
+            "forge":    FORGEVERSION,
+            "cdn":  "df.mokeyjay.com"
         });
     }
      async crashReport (body) {
@@ -103,6 +104,13 @@ class MC{
     getClientID(){
         return msg("success",200,{
             clientID:uuid()
+        });
+    }
+    getServerstate(){
+        return msg("success",200,{
+            state:"online",
+            player:20,
+            msg:"欢迎进入"
         });
     }
 }
