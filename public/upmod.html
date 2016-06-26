@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="http://xjx.sb/vue.js" ></script>
+    <script src="./vue.js" ></script>
     <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
     <style type="text/css">
         *{
@@ -140,7 +140,9 @@
                                 version:        $("#version").val(),
                                 filePath:       data.path,
                                 note:           $("#note").val()
-                            },(data)=>console.log(data));
+                            },function (data) {
+                                alert("OK");
+                            });
                         }
                     });
             }

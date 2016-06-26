@@ -9,3 +9,6 @@ export const uuid =function () {
         return v.toString(16);
     });
 }
+export const isnull = function () {
+    
+}
