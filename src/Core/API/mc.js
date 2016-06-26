@@ -36,7 +36,7 @@ class MC{
         this.apiName = apiName;
     }
      getVersion () {
-        return msg("error",200,{
+        return msg("success",200,{
             "version":  VERSION,
             "mc":       MCVERSION,
             "forge":    FORGEVERSION

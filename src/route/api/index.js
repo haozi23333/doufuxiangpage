@@ -54,7 +54,7 @@ apiroute.get("/mc/:id",async (ctx,next)=> {
     var apiName = ctx.params.id;
     var _body = ctx.request.body;
     // ctx.body = JSON.stringify(ctx.params);
-    var mc = new mc(ctx.params.id);
+    var mc = new MC.mc(ctx.params.id);
     console.log("OK")
     switch (apiName) {
         case "getVersion":
@@ -62,9 +62,6 @@ apiroute.get("/mc/:id",async (ctx,next)=> {
             break;
         case "crashReport":
             ctx.body = msg("error", MSG.errorCode.CallMethodError, "此不允许Get请求");
-            break;
-        case "getMod":
-            ctx.body = await mc.putMod(_body);
             break;
         case "getModsList":
             ctx.body = await mc.getModsList();
