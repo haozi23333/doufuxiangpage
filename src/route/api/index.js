@@ -70,6 +70,5 @@ apiroute.get("/mc/:id",async (ctx,next)=> {
             ctx.body = msg("error", 404, "API不存在");
             break;
     }
-    ctx.body = "2333";
 });
 
