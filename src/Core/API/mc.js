@@ -40,7 +40,7 @@ class MC{
             "version":  VERSION,
             "mc":       MCVERSION,
             "forge":    FORGEVERSION,
-            "cdn":  "df.mokeyjay.com"
+            "cdn":  "http://df.mokeyjay.com"
         });
     }
      async crashReport (body) {
