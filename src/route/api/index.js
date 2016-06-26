@@ -43,6 +43,9 @@ apiroute.post("/mc/:id",async function (ctx) {
         case "getClientID":
             ctx.body = mc.getClientID();
             break;
+        case "getServerstate":
+            ctx.body = mc.getServerstate();
+            break;
         default:
             ctx.body = msg("error",404,"API不存在");
             break;
@@ -65,6 +68,9 @@ apiroute.get("/mc/:id",async (ctx,next)=> {
             break;
         case "getModsList":
             ctx.body = await mc.getModsList();
+            break;
+        case "getServerstate":
+            ctx.body = mc.getServerstate();
             break;
         default:
             ctx.body = msg("error", 404, "API不存在");
