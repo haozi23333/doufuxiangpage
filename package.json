@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel -d lib/ src/ && babel _app.js --out-file app.js",
     "mdzz": "npm run compile && node --harmony index.js",
-    "OK":"git fetch --all && git reset --hard origin/master && npm run mdzz",
-    "_test":"npm run compile && node --harmony ./lib/test.js"
+    "OK": "git fetch --all && git reset --hard origin/master && npm run mdzz",
+    "_test": "npm run compile && node --harmony ./lib/test.js"
   },
   "repository": {
     "type": "git",
@@ -39,8 +39,9 @@
     "koa-static": "^2.0.0",
     "md5": "^2.1.0",
     "mongoose": "^4.5.1",
-    "mpromise":"^0.5.5",
+    "mpromise": "^0.5.5",
     "multer": "^1.1.0",
+    "multiparty": "^4.1.2",
     "node-uuid": "^1.4.7",
     "qiniu": "^6.1.11"
   },

@@ -26,5 +26,6 @@ export const  session = async function (ctx,next) {
                 ctx.auth.UserId = UserId;
         }
     }
+    console.log('next');
     next();
 };
