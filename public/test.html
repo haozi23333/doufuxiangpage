@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/materialize.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <script type="text/javascript" src="js/jquery-2.1.1.js" ></script>
+    <script type="text/javascript" src="js/materialize.js"  ></script>
+    <script type="text/javascript" src="vue.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #todo-list{
+            width: 100%;
+            height: 100%;
+        }
+        .Red{
+            color: #f44437;
+        }
+        .Green{
+            color: #4daf51;
+        }
+        .Yellow{
+            color: #f2ca28;
+        }
+        .Clouds{
+            color: #fbfcfc;
+        }
+        .Blue{
+            color: #4ba3df;
+        }
+        .Purple{
+            color: #a66cbe;
+        }
+    </style>
+</head>
+<body>
+    <div  id="todo-list">
+        <ul class="collection">
+            <li  v-if="true" v-for="a in list" class="collection-item animated " transition="bounce">
+                <i  class="fa fa-circle {{a.color}} cor"></i>
+                <span>{{a.thing}}</span>
+                <div class="progress">
+                    <div class="determinate" v-bind:style="{width:a.statu}"></div>
+                </div>
+                <a class="btn waves-button-input waves-effect">删除</a>
+            </li>
+        </ul>
+        <input class="waves-button-input" v-model="color" value="Red">
+        <input class="waves-button-input" v-model="statu" value="20%">
+        <input class="waves-button-input" v-model="thing" value="efqwefewef">
+        <a class="waves-effect waves-light btn" v-on:click="add">添加</a>
+        <a class="waves-effect waves-light btn" v-on:click="delect">删除</a>
+    </div>
+
+</body>
+</html>
+<script>
+    var list = new Vue({
+        el:"#todo-list",
+        data:{
+            list:[
+                {
+                    color:"Red",
+                    statu:"50%",
+                    thing:"完成@@@@@@"
+                },
+                {
+                    color:"Red",
+                    statu:"50%",
+                    thing:"完成@@@@@@"
+                },
+                {
+                    color:"Red",
+                    statu:"50%",
+                    thing:"完成@@@@@@"
+                },
+                {
+                    color:"Red",
+                    statu:"50%",
+                    thing:"完成@@@@@@"
+                },
+                {
+                    color:"Red",
+                    statu:"50%",
+                    thing:"完成@@@@@@"
+                },
+                {
+                    color:"Red",
+                    statu:"50%",
+                    thing:"完成@@@@@@",
+                    overTime:new Date()
+                }
+            ],
+            color:"",
+            statu:"",
+            thing:""
+        },
+        beforeCompile:function () {
+            this._list = this.list;
+            this.list = [];
+            var jsq = setInterval( ()=> {
+                        if(this._list.length ==0)
+                clearInterval(jsq);
+            else
+            this.list.push(this._list.pop())
+            console.log(this.list.length)
+            },200);
+        },
+        methods:{
+            add:function () {
+                this.list.push({
+                    color:this.color,
+                    statu:this.statu,
+                    thing:this.thing
+                })
+            },
+            delect:function () {
+                this.list.pop();
+            }
+        }
+    });
+    Vue.transition('bounce', {
+        enterClass: 'bounceInLeft',
+        leaveClass: 'hinge'
+    });
+
+</script>

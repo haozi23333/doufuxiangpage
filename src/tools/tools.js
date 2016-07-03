@@ -12,3 +12,19 @@ export const uuid =function () {
 export const isnull = function () {
     
 }
+
+
+export const check = function (rules,checked) {
+    for (let i in rules){
+        if(!checked[i]&&rules[i][1])
+            return `${i}不存在`;
+        if(rules[i][0] == Number) {
+            if (!(typeof (checked[i] == "number")) && rules[i][1])
+                return `${i}类型不正确`;
+        }
+        else
+        if(!(checked[i] instanceof rules[i][0])&&rules[i][1])
+            return `${i}类型不正确`;
+    }
+    return true;
+}

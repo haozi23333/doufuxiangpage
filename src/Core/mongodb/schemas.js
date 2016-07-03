@@ -9,7 +9,8 @@ var userSchema = new Schema({
     password        : String,
     registerDate    : Date,
     clentId         : Array,
-    faceId          : String
+    faceId          : String,
+    state           : String
 });
 
 
