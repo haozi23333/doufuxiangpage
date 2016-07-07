@@ -60,5 +60,5 @@ export const upload = async function (ctx,next) {
     if (url[0] === "api" && url[1] === "upload" && req.method === 'POST')
         ctx.body = await ff();
     else
-        next();
+       await next();
 }

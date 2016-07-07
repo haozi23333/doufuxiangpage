@@ -8,9 +8,10 @@ var userSchema = new Schema({
     username        : String,
     password        : String,
     registerDate    : Date,
-    clentId         : Array,
+    ClientId         : Array,
     faceId          : String,
-    state           : String
+    state           : String,
+    uuid:           String
 });
 
 

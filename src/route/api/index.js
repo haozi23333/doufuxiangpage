@@ -12,11 +12,12 @@ export let apiroute = Route({
 });
 
 apiroute.post("/mc/:id",async function (ctx) {
+    // if(ctx.auth.UserId)
+        // console.log(ctx.auth.UserId);
     var apiName = ctx.params.id;
     var _body = ctx.request.body;
     var mc = new MC.mc(ctx.params.id);
     console.log(apiName);
-    var body = "";
     switch (apiName)
     {
         case "getVersion":
@@ -26,7 +27,7 @@ apiroute.post("/mc/:id",async function (ctx) {
             ctx.body  = await mc.crashReport(ctx.request.body);
             break;
         case "clientId":
-            ctx.body  =  msg("success",200,tools.uuiud());
+            ctx.body  =  msg("success",200,tools.uuid());
             break;
         case "upMod":
             ctx.body = await mc.upMod(_body);
@@ -34,17 +35,17 @@ apiroute.post("/mc/:id",async function (ctx) {
         case "getModsList":
             ctx.body = await mc.getModsList();
             break;
-        case "upload":
-            ctx.body = "233";
-            break;
         case "delectMod":
             ctx.body = await mc.delectMod(_body);
             break;
         case "getClientID":
-            ctx.body = mc.getClientID();
+            ctx.body = await mc.getClientID();
             break;
         case "getServerstate":
-            ctx.body = mc.getServerstate();
+            ctx.body = await mc.getServerstate();
+            break;
+        case "getAuth":
+            ctx.body = await mc.getAuth(ctx);
             break;
         default:
             ctx.body = msg("error",404,"API不存在");
@@ -56,7 +57,6 @@ apiroute.get("/mc/:id",async (ctx,next)=> {
     console.log("OK");          //chengg     jujue
     var apiName = ctx.params.id;
     var _body = ctx.request.body;
-    // ctx.body = JSON.stringify(ctx.params);
     var mc = new MC.mc(ctx.params.id);
     console.log("OK")
     switch (apiName) {

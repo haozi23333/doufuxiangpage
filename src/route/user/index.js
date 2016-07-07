@@ -3,18 +3,18 @@
  */
 
 import Route from "koa-router";
-import MSG from "../../tools/message";
-let route = Route({
+import User from "../../Core/user/user";
+
+export let userroute = Route({
     prefix : "/user"
 });
 
-route.post("/register",function (ctx) {
-
-    ctx.body = body;
+userroute.post("/register",async function (ctx) {
+    var user = new User();
+    ctx.body = await user.register(ctx);
 });
-route.post("/login",function (ctx) {
-
-    ctx.body = body;
+userroute.post("/login",async function (ctx) {
+    var user = new User();
+    ctx.body = await user.login(ctx);
 });
 
-export default route;

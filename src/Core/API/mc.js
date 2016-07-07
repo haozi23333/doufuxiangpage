@@ -22,15 +22,7 @@ export const bb = {
         "forge":    FORGEVERSION
     }
 };
-// var m = new schemas.mods({
-//     modid: tools.uuid(),
-//     display: "mdzz",
-//     filename: "mdzz",
-//     md5: "qwdwqdwqdwqdwqd",
-//     type: ["a","b"],
-//     version: "0.0.1",
-//     addDate: new Date()
-// });
+
 class MC{
     constructor(apiName){
         this.apiName = apiName;
@@ -47,7 +39,7 @@ class MC{
          console.log(body);
          var m = new schemas.crashReport({
              uuid            : uuid(),
-             content          : body.content,
+             content         : body.content,
              clientId        : body.clientId,
              type            : body.type,
              version         : body.version,
@@ -61,14 +53,13 @@ class MC{
          });
     }
     async getModsList(){
-        console.log(JSON.stringify(await schemas.mod.find({}).exec()));
-        return msg("success",200,JSON.stringify(await schemas.mod.find({}).exec()));
+        return msg("success",200,JSON.stringify( await schemas.mod.find({}).exec()));
     }
     async putMod(body) {
         console.log(body);
         var m = new schemas.mod(body);
         m.save();
-        return msg("success",200,JSON.stringify( schemas.mod.find({_id:m.id}).exec()));
+        return msg("success",200,JSON.stringify(await schemas.mod.find({_id:m.id}).exec()));
     }
     async upMod(body) {
         console.log(body);
@@ -112,5 +103,9 @@ class MC{
             player:20,
             msg:"欢迎进入"
         });
+    }
+    async getAuth(ctx){
+        console.log(ctx.auth);
+        return msg("error",200,ctx.auth);
     }
 }
