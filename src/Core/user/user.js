@@ -50,6 +50,13 @@ export default class User{
             });
         }
     }
+
+    /**
+     * login
+     * @param   username    {String}    post
+     * @param   password    {String}    post
+     * @param   ClientId    {String}    cookie/post
+     */
     async login(ctx) {
 
         if (ctx.auth.ClientId == null || ctx.auth.ClientId == "")
