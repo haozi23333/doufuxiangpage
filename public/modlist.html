@@ -39,6 +39,11 @@
             flex: 0.4;
             flex-shrink:0.3
         }
+        .button{
+            background: red;
+            flex: 0.2;
+            flex-shrink:0.2;
+        }
     </style>
 </head>
 <body>
@@ -49,7 +54,10 @@
         <a>display</a>
         <a>filename</a>
         <a>type</a>
-        <a>version</a>    </div>
+        <a>version</a>
+        <a>MD5</a>
+        <a class="button" style="background: white">Download</a>
+    </div>
     <div v-for="mod in mods">
         <input type="checkbox" v-model="checkedmod" v-bind:value="mod.uuid">
         <a>{{mod.modid}}</a>
@@ -57,6 +65,8 @@
         <a>{{mod.filename}}</a>
         <a>{{mod.type.join('-')}}</a>
         <a>{{mod.version}} </a>
+        <a>{{mod.md5}} </a>
+        <a href="http://df.mokeyjay.com/mc/mods/{{mod.filename}}" style="height: 30px;font-size: 15px" class="button"> 下载</a>
     </div>
     <button v-on:click="delect">delect</button>
 </div>
